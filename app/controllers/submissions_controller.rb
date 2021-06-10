@@ -5,12 +5,13 @@ class SubmissionsController < ApplicationController
   def index
     @submissions = Submission.all
 
-    render json: @submissions
+    render json: @submissions, include:[:users]
   end
 
   # GET /submissions/1
   def show
-    render json: @submission
+    @submission = Submission.find_by(params[:id])
+    render json: @submission, include: [:users]
   end
 
   # POST /submissions
